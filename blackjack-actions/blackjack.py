@@ -13,11 +13,29 @@ def hand_value(cards):
     return total
 
 
-def parse_state(text):
-    hand_str, dealer_upcard, flag = [part.strip() for part in text.split("|")]
-    hand = [rank.strip() for rank in hand_str.split(",")]
 
-    return ...
+def parse_state(text):
+    parts = text.split("|") # split the player's drawn cards from the dealer's cards and the first decision
+    # print("Parts:", parts)
+
+    cleaned_parts = [] # create new list of cleaned separate parts
+
+    for part in parts:
+        # print("Part",part)
+        cleaned_parts.append(part.strip()) 
+        # separate each value in the parts list, strip any spaces and then add to the "cleaned_parts" list
+        # print("cleaned", cleaned_parts)
+
+    hand_str, dealer_upcard, flag = cleaned_parts # assign variables to each value in the list 
+
+    hand = [] # create an empty list to separate the cards dealt to the player 
+    for rank in hand_str.split(","): 
+        hand.append(rank.strip()) # loop through the list to strip and separate the two values to add to the "hand" list 
+    # print("Hand =", hand)
+    return hand, dealer_upcard, flag # Return the hand list, the dealer's card and the flag
+
+
+    print(parse_state("10, 6 | 9 | first"))
 
 
 def generate_actions(state):
