@@ -90,3 +90,14 @@ print(generate_actions(new_state))
 
 def apply_action(state, action, next_card=None):
     raise NotImplementedError("This function is not implemented yet.")
+
+s = state.copy()     #copy state so that we don't mess up the original state
+s["hand"] = state["hand"].copy()    #copy hand list separately
+s["first"] = False                 #not first turn
+
+if action == "Hit":   #player hits another card gets added
+    s["hand"].append(next_card)   #add card
+    s["total"] += card_value(next_card) #update total 
+    if s["total"] > 21:      #if the total goes over 20 we mark them as bust
+        s["busted"] = True  #check bust
+    return s   #return new state
