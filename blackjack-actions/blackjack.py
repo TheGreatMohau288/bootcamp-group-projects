@@ -59,8 +59,33 @@ def parse_state(text):
     print(parse_state("10, 6 | 9 | first"))
 
 
-def generate_actions(state):
-    raise NotImplementedError("This function is not implemented yet.")
+def generate_actions(state): 
+    actions = [] # Create a list called actions to insert all possible actions during each round
+    player_points = 0
+    for a, b in enumerate(state):
+        player_points  = int(b[0]) + int(b[1])
+        break
+        
+
+    if state[2] == "busted" or state[2] == "done":
+        return actions
+        
+    actions.append("hit")
+    actions.append("stand")
+
+    if player_points < 21 and state[2] == "first":
+        if player_points % player_points == 0: # Compare both player cards to see if they are equal to return "split"
+            actions.append("split")
+
+        actions.append("surrender")
+
+        if state[1] == "A":
+            actions.append("insurance")
+    if player_points > 21:
+        actions.append("bust")
+    return actions
+        
+print(generate_actions(new_state))
 
 
 def apply_action(state, action, next_card=None):
