@@ -1,16 +1,37 @@
-RANK_VALUES = {
-    "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10,
-    "J": 10, "Q": 10, "K": 10, "A": 11,
+rank_values = {
+    "2": 2, 
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8, 
+    "9": 9, 
+    "10": 10,
+    "J": 10, 
+    "Q": 10, 
+    "K": 10, 
+    "A": 11,
 }
 
+# print(rank_values)
+def hand_values(cards):
+    total = 0 # This is total possible drawn cards by the player
+    aces = 0 # this is total number of posible aces drawn by the player and dealer
 
-def hand_value(cards):
-    total = sum(RANK_VALUES[card] for card in cards)
-    aces = cards.count("A")
-    while total > 21 and aces > 0:
+    for card in cards: # Loop through the keys in the "rank_values" dictionery
+        
+        total += rank_values[card] # add keys to the total possible cards drawn by player
+        if card == "A": 
+            aces += 1 # add 1 to the ace total everytime an ace is drawn  
+
+    while total > 21 and aces > 0: # l
         total -= 10
         aces -= 1
     return total
+
+# print(hand_values("9"))
+# "10, 6 | 9 | first"
 
 
 
